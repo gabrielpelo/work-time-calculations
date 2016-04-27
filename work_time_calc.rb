@@ -40,6 +40,8 @@ puts "Bem vindo!"
 puts "Este programa deve calcular seu horário de saída."
 puts "(digite \"sair\" para encerrar o programa)\n\n"
 
+exit_cmds = ['sair', 'quit', 'exit', 'leave', 'bye']
+
 begin
   print "  Que horas você entrou? \n  > "
   t = gets.chomp
@@ -55,4 +57,4 @@ begin
   end
   puts "\n\n"
 
-end until t == "sair"
+end until exit_cmds.include? t.downcase
