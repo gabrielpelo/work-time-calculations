@@ -24,8 +24,8 @@ def get_help
        }
 end
 
-exit_cmds = ['sair', 'quit', 'exit', 'leave', 'bye']
-help_cmds = ['ajuda', 'help', 'info', 'options']
+exit_cmds = %w{ sair quit exit leave bye s q e l b }
+help_cmds = %w{ ajuda help info options a h i o ? }
 
 puts %{Bem vindo!
 Este programa calcula seu horário de saída.}
