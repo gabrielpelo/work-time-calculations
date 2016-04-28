@@ -14,6 +14,18 @@ def get_help
       - hh.mm
       - hhmm
 
+    Voce tambem pode passar o tempo de saida para
+    calcularmos a data de entrada, basta entrar com o
+    horario de saida com o sinal de "-" na frente.
+    Exemplo:
+      > -20:00
+
+    Para calcular o tempo entre dois horarios basta
+    informar os dois horarios na mesma linha separados
+    por espaco.
+    Exemplo:
+      > 9:58 19:33
+
     Se precisar de ajuda, digite "ajuda" para exibir
     esta mensagem.
 
@@ -36,6 +48,18 @@ begin
 
   if help_cmds.include? t.downcase
     get_help
+  elsif t.split.length == 2
+    a = to_minute(t.split[0])
+    b = to_minute(t.split[1])
+    c = b - a
+
+    a = to_hour(a)
+    b = to_hour(b)
+    c = to_hour(c)
+
+    puts "\n"
+    puts "    Entre #{a} e #{b}."
+    puts "    Temos #{c}."
   elsif t.gsub(/\D/,'') != ''
     if t[0] == '-'
       t = t.gsub(/\-/,'')
