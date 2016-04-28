@@ -37,14 +37,24 @@ begin
   if help_cmds.include? t.downcase
     get_help
   elsif t.gsub(/\D/,'') != ''
+    if t[0] == '-'
+      t = t.gsub(/\-/,'')
 
-    a = to_hour(to_minute(t))
-    b = calc(t)
-    c = time_to_go(b)
+      a = to_hour(to_minute(t))
+      b = calc_reverse(t)
 
-    puts "\n"
-    puts "    Entrada em #{a}."
-    puts "    Você deve sair às: #{b}. Faltam #{c}."
+      puts "\n"
+      puts "    Saida em #{a}."
+      puts "    Entrada às #{b}."
+    else
+      a = to_hour(to_minute(t))
+      b = calc(t)
+      c = time_to_go(b)
+
+      puts "\n"
+      puts "    Entrada em #{a}."
+      puts "    Você deve sair às #{b}. Faltam #{c}."
+    end
   else
     puts "\n"
   end

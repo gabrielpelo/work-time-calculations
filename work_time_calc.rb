@@ -2,6 +2,11 @@ def calc(t)
   to_hour to_minute(t) + to_minute("9:48")
 end
 
+def calc_reverse(t)
+  to_hour to_minute(t) - to_minute("9:48")
+end
+
+
 def time_to_go(t)
   t1 = to_minute(Time.now.hour.to_s + ":" + Time.now.min.to_s)
   t2 = to_minute(t)
