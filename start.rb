@@ -1,4 +1,4 @@
-require './work_time_calc'
+require './instant.rb'
 
 def get_help
   puts %{
@@ -45,42 +45,45 @@ Este programa calcula seu horário de saída.}
 begin
   print "\n  Que horas você entrou? \n  > "
   t = gets.chomp
+  puts "\n"
 
   if help_cmds.include? t.downcase
     get_help
-  elsif t.split.length == 2
-    a = to_minute(t.split[0])
-    b = to_minute(t.split[1])
-    c = b - a
+  elsif t.split.length > 1
+    times = []
 
-    a = to_hour(a)
-    b = to_hour(b)
-    c = to_hour(c)
+    t.split.each do |s|
+      times.push(Instant.new(s))
+    end
 
-    puts "\n"
-    puts "    Entre #{a} e #{b}."
-    puts "    Temos #{c}."
+    (0..times.length-2).each do |i|
+      a = times[i]
+      b = times[i+1]
+      c = b - a
+      puts "    Entrada: #{a}"
+      puts "    Saida:   #{b}"
+      puts "    Total:   #{c}"
+      puts ""
+    end
   elsif t.gsub(/\D/,'') != ''
     if t[0] == '-'
-      t = t.gsub(/\-/,'')
-
-      a = to_hour(to_minute(t))
-      b = calc_reverse(t)
-
-      puts "\n"
-      puts "    Saida em #{a}."
-      puts "    Entrada às #{b}."
+      t = t[1..-1]
+      a = Instant.new(t.to_s)
+      b = Instant.new("9:48")
+      c = a - b
+      d = a - Instant.now
+      puts "    Entrada: #{c}"
+      puts "    Saida:   #{a}"
+      puts "    Faltam:  #{d}"
     else
-      a = to_hour(to_minute(t))
-      b = calc(t)
-      c = time_to_go(b)
-
-      puts "\n"
-      puts "    Entrada em #{a}."
-      puts "    Você deve sair às #{b}. Faltam #{c}."
+      a = Instant.new(t)
+      b = Instant.new("9:48")
+      c = a + b
+      d = c - Instant.now
+      puts "    Entrada: #{a}"
+      puts "    Saida:   #{c}"
+      puts "    Faltam:  #{d}"
     end
-  else
-    puts "\n"
   end
 
 end until exit_cmds.include? t.downcase
