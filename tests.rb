@@ -32,3 +32,32 @@ same_times = %w{ 09:35 09.35 9:35 9.35 935 0935 9 }
 (times + same_times).map { |t| Instant.new(t) }.each do |t|
   puts "time: #{t}  time_in_min: #{t.to_i}"
 end
+
+puts "\n"
+
+a = Instant.new("2033")
+b = Instant.new("2034")
+c = Instant.new("2033")
+d = Instant.new("2133")
+
+x = %w{ 2033 2034 2033 2133}
+x.map! { |t| Instant.new(t) }
+
+puts x
+
+puts "\n"
+
+puts x.map { |t| t.to_i }
+
+puts "\n"
+
+(2..x.length).each do |i|
+  a = x[i-2]
+  b = x[i-1]
+  c = b - a
+
+  puts "#{b} - #{a} = #{c}"
+  puts "#{b.to_i} - #{a.to_i} = #{c.to_i}"
+  puts "\n"
+
+end
