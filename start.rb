@@ -1,4 +1,4 @@
-require './instant.rb'
+require_relative 'instant'
 
 def get_help
   puts %{

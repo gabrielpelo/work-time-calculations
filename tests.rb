@@ -1,4 +1,4 @@
-require './instant.rb'
+require_relative 'instant'
 
 a = Instant.new("1012")
 b = Instant.new("2021")
