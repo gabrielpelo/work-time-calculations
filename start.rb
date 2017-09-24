@@ -50,7 +50,7 @@ end
 
 def calculate_entrance_time(t)
   a = Instant.new(t)
-  b = Instant.new("9:48")
+  b = Instant.new("10:00")
   c = a - b
   d = a - Instant.now
   print_result(c, a, d)
@@ -58,7 +58,7 @@ end
 
 def calculate_exit_time(t)
   a = Instant.new(t)
-  b = Instant.new("9:48")
+  b = Instant.new("10:00")
   c = a + b
   d = c - Instant.now
   print_result(a, c, d)
