@@ -1,4 +1,5 @@
 require_relative 'instant'
+require 'date'
 
 def get_help
   puts %{
@@ -50,7 +51,7 @@ end
 
 def calculate_entrance_time(t)
   a = Instant.new(t)
-  b = Instant.new("10:00")
+  b = Instant.new(workday_time)
   c = a - b
   d = a - Instant.now
   print_result(c, a, d)
@@ -58,10 +59,14 @@ end
 
 def calculate_exit_time(t)
   a = Instant.new(t)
-  b = Instant.new("10:00")
+  b = Instant.new(workday_time)
   c = a + b
   d = c - Instant.now
   print_result(a, c, d)
+end
+
+def workday_time()
+  Date.today.wday == 5 ? "09:00" : "10:00"
 end
 
 def print_result(a, b, c)
